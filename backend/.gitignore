@@ -1,1 +1,8 @@
-node_modules/
+# node modules
+/node_modules
+
+# environment variables
+.env
+
+# Google Cloud Service Account Credentials
+vantasticplus-firebase-adminsdk-d98um-6b73460b2b.json
