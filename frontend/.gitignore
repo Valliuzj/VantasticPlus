@@ -5,6 +5,10 @@
 /dist
 /build
 
+# Next.js build output
+/.next
+/out
+
 # Environment variables
 .env
 
@@ -16,3 +20,7 @@ yarn-error.log*
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Ignore caches
+.cache
+.next/cache
