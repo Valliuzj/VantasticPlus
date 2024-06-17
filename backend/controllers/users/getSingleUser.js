@@ -11,8 +11,8 @@ exports.getSingleUser = async function(req, res) {
                 res.status(404).json({ error: "User not found" });
                 return;
             }
-            const userData = userSnapshot.data();
-            res.status(200).json({ userData });
+            const { password, ...userDataWithoutPassword } = userSnapshot.data();
+            res.status(200).json({ userData: userDataWithoutPassword });
         } catch (error) {
             console.error("Error retrieving user:", error);
             res.status(500).json({ error: "Error retrieving user" });
