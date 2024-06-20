@@ -52,7 +52,7 @@ const Navbar = () => {
               </Command>
 
               <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
-              Text to speech
+              Chatbot
               </Button>
             </div>
 
