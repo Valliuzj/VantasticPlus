@@ -31,6 +31,7 @@ exports.userLogin = async function (req, res) {
             {
             email: user.userEmail,
             name: user.displayName,
+            photoURL: user.photoURL || "",
             iat: currentTimestamp, 
             exp: currentTimestamp + expiresIn, 
             },
