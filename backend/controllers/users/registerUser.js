@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.registerUser = async function(req, res) {
     if (req.method === "POST") {
         try {
-            const { email, password, displayName } = req.body;
+            const { email, password, displayName, photoURL = "" } = req.body;
 
             if (!email || !password || !displayName) {
                 return res.status(400).json({ error: "email, password and displayName are required" });
@@ -27,7 +27,7 @@ exports.registerUser = async function(req, res) {
                 userEmail: email,
                 password: hashedPassword,
                 displayName: displayName,
-                photoURL: ""
+                photoURL: photoURL,
             });
 
             // Generate token for first time login, token expires in 2 hours
@@ -38,6 +38,7 @@ exports.registerUser = async function(req, res) {
                 {
                     email: email,
                     name: displayName,
+                    photoURL: photoURL,
                     iat: currentTimestamp, // Issued at time
                     exp: currentTimestamp + expiresIn, // Expiration time
                 },
@@ -50,7 +51,7 @@ exports.registerUser = async function(req, res) {
                 token: token
             });
         } catch (error) {
-            //console.error("Error registering new user:", error);
+            console.error("Error registering new user:", error);
             return res.status(500).json({ "Error registering new user:": error });
         }
     } else {
