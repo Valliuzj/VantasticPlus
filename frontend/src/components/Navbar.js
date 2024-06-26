@@ -76,12 +76,16 @@ const Navbar = () => {
               </Menubar>
             ):(
               <>
-            <Button className="mx-2 text-gray-900 bg-white hover:bg-gray-100 text-xl font-medium rounded border border-gray-300">
-              Log in
-            </Button>
-            <Button className="mx-2 text-gray-900 bg-yellow-400 hover:bg-yellow-500 text-xl font-medium rounded">
-              Sign up
-            </Button>
+              <Link href="/login">
+                <Button className="mx-2 text-gray-900 bg-white hover:bg-gray-100 text-xl font-medium rounded border border-gray-300">
+                Log in
+              </Button>
+              </Link>
+              <Link href="/signup">
+                <Button className="mx-2 text-gray-900 bg-yellow-400 hover:bg-yellow-500 text-xl font-medium rounded">
+                Sign up
+                </Button>
+              </Link>
             </>
             )
               }
