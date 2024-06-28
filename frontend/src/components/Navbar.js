@@ -1,10 +1,12 @@
 // components/Navbar.js
 "use client";
 import Link from 'next/link';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+//ui
 import { Button } from './ui/button';
 import { CommandInput,Command } from './ui/command';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useState } from 'react';
 import {
   Menubar,
   MenubarContent,
@@ -19,8 +21,33 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = sessionStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/me`, 
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, 
+              }
+            }
+          );
+          setUser(response.data.userData);
+          console.log(response.data.userData)
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   const signUserOut = ()=>{
-    setUser(!user);
+    sessionStorage.removeItem('token');
+    setUser(null);
   }
 
   const toggleDropdown = () => {
@@ -58,17 +85,19 @@ const Navbar = () => {
 
       {/*user bar */}
           <div className="h-15 w-fit flex items-center justify-between sm:flex sm:items-center">
-            {!user?(
+            {user?(
               <Menubar>
                 <MenubarMenu>
                   <MenubarTrigger>
                     <Avatar className="mx-2">
-                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarImage src={user.photoURL || "https://github.com/shadcn.png"}/>
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                   </MenubarTrigger>
                   <MenubarContent  className="z-[150]">
-                    <MenubarItem>Account Settings</MenubarItem>
+                    <MenubarItem>
+                      <Link href="/setting">Account Settings</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem onClick={signUserOut}>Log out</MenubarItem>
                   </MenubarContent>

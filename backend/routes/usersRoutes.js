@@ -7,7 +7,7 @@ const getSingleUserController = require("../controllers/users/getSingleUser");
 const loginController = require("../controllers/users/login");
 
 router.post("/register", registerUserController.registerUser);
-router.get("/user/:email", protect, getSingleUserController.getSingleUser);
+router.get("/me", protect, getSingleUserController.getSingleUser);
 router.post("/login", loginController.userLogin);
 
 module.exports = router;

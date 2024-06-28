@@ -1,11 +1,15 @@
 "use client"
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from "next/image"
 import Link from "next/link"
-import '../components/index.css'
 
+//state and components
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { toast, ToastContainer } from 'react-toastify';
+
+//ui+CSS
+import '../components/index.css'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -38,6 +42,14 @@ const Signup = () => {
 
       // Handle successful registration
       if (response.status === 201) {
+        sessionStorage.setItem('token', token);
+        
+        //Show toast with success message
+        toast.success('Registration successful!', {
+          position: "top-right",
+          autoClose: 2000, // 2 seconds
+        });
+
         // Redirect to the homepage
         router.push('/');
       }
