@@ -1,0 +1,6 @@
+# Environment variables
+.env
+
+# Operating system files
+.DS_Store
+
