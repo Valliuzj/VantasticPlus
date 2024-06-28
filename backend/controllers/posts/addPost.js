@@ -25,6 +25,7 @@ exports.addPost = async function(req, res) {
 
             return res.status(201).json({
                 message: "Post added successfully",
+                postID: postRef.id
             });
         } catch (error) {
             //console.error("Error registering new user:", error);
