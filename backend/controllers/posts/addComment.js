@@ -26,7 +26,8 @@ exports.addComment = async function(req, res) {
             });
 
             return res.status(201).json({
-                message: "Comment added successfully",
+                message: "Comment added successfully", 
+                commentID: commentRef.id
             });
         } catch (error) {
             return res.status(500).json({ "Error adding comment:": error });
