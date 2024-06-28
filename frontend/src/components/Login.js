@@ -73,6 +73,12 @@ const Login = () => {
             <div className="mx-auto grid w-[350px] gap-6">
               <div className="grid gap-2 text-center">
                 <h1 className="text-3xl font-bold">Login</h1>
+                <Link href="/" className="underline">
+                  Back to home
+                </Link>
+                <p className="text-balance text-muted-foreground">
+                  Enter your email below to login to your account
+                </p>
               </div>
               <div className="grid gap-4">
                 <div className="grid gap-2">
@@ -112,10 +118,7 @@ const Login = () => {
               <div className="mt-4 text-center text-sm">
                 New to Vantastic Plus?{" "}
                 <Link href="/signup" className="underline text-rose-500">
-                  Register!
-                </Link>
-                {" "}or <Link href="/" className="underline text-rose-500">
-                  Back to home
+                  Create an Account!
                 </Link>
               </div>
             </div>
