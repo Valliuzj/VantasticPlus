@@ -4,6 +4,9 @@ import { usePathname } from 'next/navigation'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "@/context/AuthContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,9 +16,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {isRender && <Navbar />}
-        {children}
-        {isRender&&<Footer/>}
+        <AuthProvider>
+          {isRender && <Navbar />}
+          {children}
+          {isRender&&<Footer/>}
+          <ToastContainer />
+       </AuthProvider>
       </body>
     </html>
   );

@@ -2,7 +2,8 @@
 "use client";
 import Link from 'next/link';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
+import { AuthContext} from '@/context/AuthContext';
 //ui
 import { Button } from './ui/button';
 import { CommandInput,Command } from './ui/command';
@@ -18,41 +19,16 @@ import {
 } from "@/components/ui/menubar"
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const{user,setUser}=useContext(AuthContext);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        try {
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/me`, 
-            {
-              headers: {
-                Authorization: `Bearer ${token}`, 
-              }
-            }
-          );
-          setUser(response.data.userData);
-          console.log(response.data.userData)
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      }
-    };
-
-    fetchUser();
-  }, []);
-
+    console.log("Navbar user state changed:", user);
+  }, [user]);
+  
   const signUserOut = ()=>{
     sessionStorage.removeItem('token');
     setUser(null);
   }
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
 
   return (
     <nav className='sticky z-[100] h-24 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
