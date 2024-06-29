@@ -6,7 +6,8 @@ import Link from "next/link"
 //state and components
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { toast, ToastContainer } from 'react-toastify';
+import { AuthContext } from '@/context/AuthContext';
+import { toast} from 'react-toastify';
 
 //ui+CSS
 import '../components/index.css'
@@ -18,6 +19,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({username: '', email: '', password: '' })
   const [error, setError] = useState('');
   const router = useRouter();
+ // const { setUser } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -42,12 +44,11 @@ const Signup = () => {
 
       // Handle successful registration
       if (response.status === 201) {
-        sessionStorage.setItem('token', token);
-        
+        sessionStorage.setItem('token', response.data.token);
+
         //Show toast with success message
-        toast.success('Registration successful!', {
-          position: "top-right",
-          autoClose: 2000, // 2 seconds
+        toast('Registration successful!', {
+          position: "top-center",
         });
 
         // Redirect to the homepage
