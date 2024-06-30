@@ -43,7 +43,7 @@ const Navbar = () => {
                   Quiz
               </Link>
 
-              <Link href="/learn&share" className="text-gray-900 border-b-2 border-transparent text-xl font-medium hover:border-violet-500">
+              <Link href="/discuss" className="text-gray-900 border-b-2 border-transparent text-xl font-medium hover:border-violet-500">
                   Learn & share
               </Link>
             </div>
