@@ -21,10 +21,7 @@ import {
 const Navbar = () => {
   const{user,setUser}=useContext(AuthContext);
 
-  useEffect(() => {
-    console.log("Navbar user state changed:", user);
-  }, [user]);
-  
+console.log(user);
   const signUserOut = ()=>{
     sessionStorage.removeItem('token');
     setUser(null);
@@ -54,9 +51,11 @@ const Navbar = () => {
                 placeholder="Type a command or search..." />
               </Command>
 
-              <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
-              Chatbot
-              </Button>
+              <Link href="/chatbot">
+                <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
+                Chatbot
+                </Button>
+              </Link>
             </div>
 
       {/*user bar */}
