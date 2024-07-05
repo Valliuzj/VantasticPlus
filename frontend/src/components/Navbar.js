@@ -17,13 +17,13 @@ import {
 } from "@/components/ui/menubar";
 
 const Navbar = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const {user,setUser}=useContext(AuthContext);
 
-  useEffect(() => {
-    console.log("Navbar user state changed:", user);
-  }, [user]);
-
-  const signUserOut = () => {
+  // useEffect(() => {
+  //   console.log("Navbar user state changed:", user);
+  // }, [user]);
+  
+  const signUserOut = ()=>{
     sessionStorage.removeItem('token');
     setUser(null);
   }

@@ -38,6 +38,13 @@ const DiscussionBoard = () => {
         <div className="bg-violet-50">
             <section>
                 <ScreenWrapper className='pb-24 pt-10 sm:pb-32 lg:pt-24 xl:pt-32 lg:pb-40'>
+                    <div className='mb-5'>
+                      <Link href="/createpost">
+                        <Button>
+                            Create a Post
+                        </Button>
+                      </Link>
+                    </div>
                     {posts?.map(post =>(
                         <Post key={post.id} post={post}/>
                         ))}
