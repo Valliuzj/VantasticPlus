@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 //state and components
-import React, { useState,useContext, useEffect } from 'react';
+import React, { useState,useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/context/AuthContext';
 import { toast } from 'react-toastify';
@@ -21,8 +21,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [error, setError] = useState('');
   const router = useRouter();
-  const { setUser } = useContext(AuthContext);
-
+  //const { setUser } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -48,7 +47,7 @@ const Login = () => {
          // Store token in cookies
          sessionStorage.setItem('token', response.data.token);
         // Update user context
-       setUser(response.data.userData);
+       // setUser(response.data.userData);
 
         //Show toast with success message
         toast('Login successful!', {
