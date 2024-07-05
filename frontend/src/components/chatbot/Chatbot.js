@@ -2,19 +2,33 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
+import axios from 'axios';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const router = useRouter();
 
-  const sendMessage = () => {
+  const sendMessage = async() => {
     if (input.trim()) {
       setMessages((prevMessages) => [...prevMessages, { text: input, sender: 'user' }]);
+      const userInput = input;
       setInput('');
-      setTimeout(() => {
-        setMessages((prevMessages) => [...prevMessages, { text: 'This is a bot response.', sender: 'bot' }]);
-      }, 1000);
+
+      try{
+        //send question to backend
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/chatbot`, { question: input });
+        const botResponse = response.data.answer;
+        //set answer
+        setMessages((prevMessages) => [...prevMessages, { text: botResponse, sender: 'bot' }]);
+      }catch(error){
+        console.error("Error fetching chatbot response:", error);
+        setMessages((prevMessages) => [...prevMessages, { text: 'Error: Could not fetch response', sender: 'bot' }]);
+      }
+      setInput('');
+      // setTimeout(() => {
+      //   setMessages((prevMessages) => [...prevMessages, { text: 'This is a bot response.', sender: 'bot' }]);
+      // }, 1000);
     }
   };
 
