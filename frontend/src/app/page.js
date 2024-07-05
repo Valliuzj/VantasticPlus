@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ScreenWrapper } from "@/components/ScreenWrapper";
-import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (

@@ -1,28 +1,14 @@
+"use client";
 import React from 'react';
 import QuizCard from '@/components/quiz/QuizCard';
-
-const quizData = {
-  id: "q12345",
-  question: "What is the capital city of France?",
-  options: [
-    "A) Paris",
-    "B) Madrid",
-    "C) Rome",
-    "D) Berlin"
-  ],
-  correctAnswer: "A",
-  explanation: "Paris is the capital city of France.",
-  tags: {
-    categories: ["geography", "history"],
-    difficulty: "easy",
-    likes: 150
-  }
-};
+import Link from 'next/link';
 
 const QuizPage = () => {
   return (
     <div>
-      <QuizCard quiz={quizData} />
+      <h1>Quiz Categories</h1>
+      <li><Link href="/quiz/category1">Category 1</Link></li>
+      <li><Link href="/quiz/category2">Category 2</Link></li>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const QuizCard = ({ quiz }) => {
                 <div>
                 <ReactCardFlip flipDirection='vertical' isFlipped={flipped}>
                     <div 
-                        className='bg-white h-[576px] rounded-xl shadow-lg relative bg-transparent mx-auto text-center flex flex-col 
+                        className='bg-white h-[450px] rounded-xl shadow-lg relative bg-transparent mx-auto text-center flex flex-col 
                         items-center justify-between lg:items-start' 
                         onClick={handleFlip}
                     >
@@ -41,7 +41,7 @@ const QuizCard = ({ quiz }) => {
                     </div>
 
                     <div 
-                        className='bg-white h-[576px] rounded-xl shadow-lg relative bg-transparent mx-auto text-center flex flex-col 
+                        className='bg-white h-[450px] rounded-xl shadow-lg relative bg-transparent mx-auto text-center flex flex-col 
                         items-center justify-between lg:items-start' 
                         onClick={handleFlip}
                     >

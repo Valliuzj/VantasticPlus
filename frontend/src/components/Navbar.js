@@ -1,10 +1,13 @@
 // components/Navbar.js
 "use client";
 import Link from 'next/link';
+import axios from 'axios';
+import { useState, useEffect,useContext } from 'react';
+import { AuthContext} from '@/context/AuthContext';
+//ui
 import { Button } from './ui/button';
 import { CommandInput,Command } from './ui/command';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useState } from 'react';
 import {
   Menubar,
   MenubarContent,
@@ -16,16 +19,16 @@ import {
 } from "@/components/ui/menubar"
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const{user,setUser}=useContext(AuthContext);
 
+  useEffect(() => {
+    console.log("Navbar user state changed:", user);
+  }, [user]);
+  
   const signUserOut = ()=>{
-    setUser(!user);
+    sessionStorage.removeItem('token');
+    setUser(null);
   }
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
 
   return (
     <nav className='sticky z-[100] h-24 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
@@ -52,23 +55,25 @@ const Navbar = () => {
               </Command>
 
               <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
-              Text to speech
+              Chatbot
               </Button>
             </div>
 
       {/*user bar */}
           <div className="h-15 w-fit flex items-center justify-between sm:flex sm:items-center">
-            {!user?(
+            {user?(
               <Menubar>
                 <MenubarMenu>
                   <MenubarTrigger>
                     <Avatar className="mx-2">
-                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarImage src={user.photoURL || "https://github.com/shadcn.png"}/>
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                   </MenubarTrigger>
                   <MenubarContent  className="z-[150]">
-                    <MenubarItem>Account Settings</MenubarItem>
+                    <MenubarItem>
+                      <Link href="/setting">Account Settings</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem onClick={signUserOut}>Log out</MenubarItem>
                   </MenubarContent>
@@ -76,12 +81,16 @@ const Navbar = () => {
               </Menubar>
             ):(
               <>
-            <Button className="mx-2 text-gray-900 bg-white hover:bg-gray-100 text-xl font-medium rounded border border-gray-300">
-              Log in
-            </Button>
-            <Button className="mx-2 text-gray-900 bg-yellow-400 hover:bg-yellow-500 text-xl font-medium rounded">
-              Sign up
-            </Button>
+              <Link href="/login">
+                <Button className="mx-2 text-gray-900 bg-white hover:bg-gray-100 text-xl font-medium rounded border border-gray-300">
+                Log in
+              </Button>
+              </Link>
+              <Link href="/signup">
+                <Button className="mx-2 text-gray-900 bg-yellow-400 hover:bg-yellow-500 text-xl font-medium rounded">
+                Sign up
+                </Button>
+              </Link>
             </>
             )
               }
