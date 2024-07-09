@@ -11,5 +11,6 @@ app.get('/', (req, res) => {
 
 app.use('', require('./routes/usersRoutes'));
 app.use('', require('./routes/postsRoutes'));
+app.use('', require('./routes/questionsRoutes'));
 
 module.exports = app;
