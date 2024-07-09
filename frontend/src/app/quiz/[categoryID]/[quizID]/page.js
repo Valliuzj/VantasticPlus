@@ -23,16 +23,18 @@ const quizData = {
 
 const SingleQuizPage = () => {
   const params = useParams();
-  const { categoryID, quizsetID, quizID } = params;
+  const { categoryID, quizID } = params;
 
-  if (!categoryID || !quizsetID || !quizID) {
+  if (!categoryID || !quizID) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
-      <h1>Quiz {quizID} in Quiz Set {quizsetID} for Category {categoryID}</h1>
-      <QuizCard quiz={quizData} />
+    <div className="bg-violet-50 min-h-screen">
+      <section className="container mx-auto p-6">
+        <h1 className="text-3xl font-bold mb-6">Quiz {quizID} in Category {categoryID}</h1>
+        <QuizCard quiz={quizData} />
+      </section>
     </div>
   );
 };
