@@ -11,6 +11,7 @@ app.get('/', (req, res) => {
 
 app.use('', require('./routes/usersRoutes'));
 app.use('', require('./routes/postsRoutes'));
+app.use('', require('./routes/questionsRoutes'));
 app.use('', require('./routes/chatbotRoutes'));
 
 module.exports = app;
