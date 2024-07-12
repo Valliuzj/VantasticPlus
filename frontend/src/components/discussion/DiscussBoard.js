@@ -9,12 +9,14 @@ import { Post } from './Post';
 
 const DiscussionBoard = () => {
   const [posts, setPosts] = useState([]);
+  const [comments,setComments]=useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
   const fetchPosts = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/getAllPosts`);
         setPosts(response.data);
+        setComments(response.data.comments);
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
