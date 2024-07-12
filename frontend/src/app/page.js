@@ -1,3 +1,5 @@
+"use client"; 
+import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { ScreenWrapper } from "@/components/ScreenWrapper";
 
@@ -23,6 +25,11 @@ export default function Home() {
                 with quiz
               </h1>
             </div>
+
+            <div className="pl-5 mt-10">
+            <Button>Quiz Now!</Button>
+            </div>
+
           </div>
           {/*right part*/}
           <div className='col-span-full lg:col-span-1 w-full flex justify-center px-8 sm:px-16 md:px-0
@@ -31,6 +38,7 @@ export default function Home() {
           </div>
         </ScreenWrapper>
       </section>
+      
 
     </div>
   );

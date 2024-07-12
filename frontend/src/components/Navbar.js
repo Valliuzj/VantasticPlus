@@ -1,29 +1,27 @@
-// components/Navbar.js
 "use client";
 import Link from 'next/link';
 import axios from 'axios';
-import { useState, useEffect,useContext } from 'react';
-import { AuthContext} from '@/context/AuthContext';
-//ui
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '@/context/AuthContext';
+// ui
 import { Button } from './ui/button';
-import { CommandInput,Command } from './ui/command';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { CommandInput, Command } from './ui/command';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Menubar,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
   MenubarSeparator,
-  MenubarShortcut,
   MenubarTrigger,
-} from "@/components/ui/menubar"
+} from "@/components/ui/menubar";
 
 const Navbar = () => {
-  const{user,setUser}=useContext(AuthContext);
+  const {user,setUser}=useContext(AuthContext);
 
-  useEffect(() => {
-    console.log("Navbar user state changed:", user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log("Navbar user state changed:", user);
+  // }, [user]);
   
   const signUserOut = ()=>{
     sessionStorage.removeItem('token');
@@ -32,71 +30,72 @@ const Navbar = () => {
 
   return (
     <nav className='sticky z-[100] h-24 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
-    <div className='flex items-center justify-between border-transparent mx-auto px-4 py-6 sm:px-6 lg:px-8'>
-      {/*left part */}
-            <div className="h-10 w-fit flex items-center justify-between mx-4 sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-              <Link href="/" className='text-gray-900 border-b-2 border-transparent text-xl font-medium  hover:border-violet-500 '>
-                  Home
-              </Link>
+      <div className='flex items-center justify-between border-transparent mx-auto px-4 py-6 sm:px-6 lg:px-8'>
+        {/* left part */}
+        <div className="h-10 w-fit flex items-center justify-between mx-4 sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+          <Link href="/" className='text-gray-900 border-b-2 border-transparent text-xl font-medium  hover:border-violet-500 '>
+            Home
+          </Link>
 
-              <Link href="/quiz" className="text-gray-900 border-b-2 border-transparent text-xl font-medium  hover:border-violet-500">
-                  Quiz
-              </Link>
+          <Link href="/quiz" className="text-gray-900 border-b-2 border-transparent text-xl font-medium  hover:border-violet-500">
+            Quiz
+          </Link>
 
-              <Link href="/learn&share" className="text-gray-900 border-b-2 border-transparent text-xl font-medium hover:border-violet-500">
-                  Learn & share
-              </Link>
-            </div>
-      {/*search bar */}
-            <div className="flex-grow flex items-center justify-between mx-4">
-              <Command className="rounded-lg border shadow-md mx-2">
-                <CommandInput
-                placeholder="Type a command or search..." />
-              </Command>
+          <Link href="/discuss" className="text-gray-900 border-b-2 border-transparent text-xl font-medium hover:border-violet-500">
+            Learn & share
+          </Link>
+        </div>
+        {/* search bar */}
+        <div className="flex-grow flex items-center justify-between mx-4">
+          <Command className="rounded-lg border shadow-md mx-2">
+            <CommandInput
+              placeholder="Type a command or search..." />
+          </Command>
 
-              <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
+          <Link href="/chatbot">
+            <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
               Chatbot
-              </Button>
-            </div>
+            </Button>
+          </Link>
+        </div>
 
-      {/*user bar */}
-          <div className="h-15 w-fit flex items-center justify-between sm:flex sm:items-center">
-            {user?(
-              <Menubar>
-                <MenubarMenu>
-                  <MenubarTrigger>
-                    <Avatar className="mx-2">
-                      <AvatarImage src={user.photoURL || "https://github.com/shadcn.png"}/>
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                  </MenubarTrigger>
-                  <MenubarContent  className="z-[150]">
-                    <MenubarItem>
-                      <Link href="/setting">Account Settings</Link>
-                    </MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem onClick={signUserOut}>Log out</MenubarItem>
-                  </MenubarContent>
-                </MenubarMenu>
-              </Menubar>
-            ):(
-              <>
+        {/* user bar */}
+        <div className="h-15 w-fit flex items-center justify-between sm:flex sm:items-center">
+          {user ? (
+            <Menubar>
+              <MenubarMenu>
+                <MenubarTrigger>
+                  <Avatar className="mx-2">
+                    <AvatarImage src={user.photoURL || "https://github.com/shadcn.png"} />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </MenubarTrigger>
+                <MenubarContent className="z-[150]">
+                  <MenubarItem>
+                    <Link href="/setting">Account Settings</Link>
+                  </MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem onClick={signUserOut}>Log out</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
+          ) : (
+            <>
               <Link href="/login">
                 <Button className="mx-2 text-gray-900 bg-white hover:bg-gray-100 text-xl font-medium rounded border border-gray-300">
-                Log in
-              </Button>
+                  Log in
+                </Button>
               </Link>
               <Link href="/signup">
                 <Button className="mx-2 text-gray-900 bg-yellow-400 hover:bg-yellow-500 text-xl font-medium rounded">
-                Sign up
+                  Sign up
                 </Button>
               </Link>
             </>
-            )
-              }
-          </div>
-
+          )}
         </div>
+
+      </div>
     </nav>
   );
 };
