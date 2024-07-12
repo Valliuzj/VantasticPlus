@@ -92,7 +92,6 @@ const Login = () => {
                     type="email"
                     placeholder="m@example.com"
                     required
-                    className="inputField"
                     value={formData.email}
                     onChange={handleChange}
                   />
@@ -110,7 +109,7 @@ const Login = () => {
                   <Input 
                     id="password" 
                     type="password" 
-                    required className="inputField"
+                    required
                     value={formData.password}
                     onChange={handleChange}/>
                 </div>
