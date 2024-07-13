@@ -1,5 +1,6 @@
 import { Avatar,AvatarFallback, AvatarImage} from "@radix-ui/react-avatar"
 import Link from 'next/link';
+import { MessageSquare } from 'lucide-react';
 
 export const Post =({post})=>{
     return(
@@ -18,9 +19,12 @@ export const Post =({post})=>{
                 </div>
           
         </div>
-        <div className="col-span-full lg:col-span-2 flex">
+        <div className="col-span-full lg:col-span-2 flex flex-col items-center justify-center relative ">
             <p className="my-auto">{post.content}</p>
-           
+            <div className="absolute bottom-3 right-10 flex items-center space-x-1 pb-5 ">
+            <MessageSquare className="w-6 h-6 mr-1"/>
+            <span>{post.comments.length}</span>
+            </div>
         </div>
         
     </div>

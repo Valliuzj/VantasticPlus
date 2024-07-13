@@ -19,12 +19,16 @@ import {
 
 export const CreatePost =()=>{
     const [formData, setFormData] = useState({ title: '', content: '' })
+    const [wordCount, setWordCount] = useState(0);
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const [wordCount, setWordCount] = useState(0);
+    
+
     const router = useRouter();
     const { user, token  } = useContext(AuthContext);
 
+    //handle form data
     const handleChange = (e)=>{
         const{id,value}=e.target;
         setFormData((prev)=>({
@@ -32,11 +36,13 @@ export const CreatePost =()=>{
             [id]:value
         }))
     }
+    //count the nums of words
     useEffect(() => {
         const words = formData.content.trim().split(/\s+/);
         setWordCount(words.length);
         }, [formData.content]);
 
+    //handle submit click
     const handleSubmit = async(e)=>{
         e.preventDefault();
         setLoading(true);
@@ -72,8 +78,9 @@ export const CreatePost =()=>{
             setLoading(false);
         }
     };
+    
     return(
-        <div className="flex min-h-screen w-full flex-col">
+        <div className="flex min-h-screen w-full flex-col bg-violet-50">
         <main className="flex flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
           <div className="max-w-3xl mx-auto w-full">
             <h1 className="text-3xl font-semibold mb-10">Create New Post</h1>

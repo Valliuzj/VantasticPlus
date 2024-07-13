@@ -17,7 +17,12 @@ exports.getSinglePost = async function(req, res) {
 
             const commentsRef = postRef.collection('comments');
             const commentsSnapshot = await commentsRef.get();
-            const comments = commentsSnapshot.docs.map(doc => doc.data());
+            const comments = commentsSnapshot.docs.map(doc =>(
+                {
+                id: doc.id, 
+                ...doc.data()
+                }
+            ));
 
             const postWithComments = {
                 post: postDoc.data(),
