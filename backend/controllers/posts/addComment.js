@@ -18,16 +18,19 @@ exports.addComment = async function(req, res) {
             if (!commentRef) {
                 return res.status(404).json({ error: 'No post found with this id' });
             }
-
-            await commentRef.set({
+            
+            const newComment = {
                 comment: comment,
                 author: author,
                 date: new Date()
-            });
+            };
+            await commentRef.set(newComment);
 
             return res.status(201).json({
-                message: "Comment added successfully", 
-                commentID: commentRef.id
+                comment: {
+                    id: commentRef.id,
+                    ...newComment
+                }
             });
         } catch (error) {
             return res.status(500).json({ "Error adding comment:": error });

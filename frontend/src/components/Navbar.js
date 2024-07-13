@@ -18,6 +18,7 @@ import {
 
 const Navbar = () => {
   const {user,setUser}=useContext(AuthContext);
+  console.log(user);
 
   // useEffect(() => {
   //   console.log("Navbar user state changed:", user);
