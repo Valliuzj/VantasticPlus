@@ -3,7 +3,7 @@ const { db } = require('../../firebase');
 exports.getSingleQuestion = async (req, res) => {
     if (req.method === "GET") {
         try {
-            const { questionID } = req.body;
+            const { questionID } = req.query;
             if (!questionID) {
                 return res.status(400).json({ error: "questionID is required" });
             }
