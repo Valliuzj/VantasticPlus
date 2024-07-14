@@ -59,8 +59,12 @@ export const Setting = () => {
         setOldPassword('');
         setNewPassword('');
         setConfirmPassword('');
-        toast.success('Password Update successful!');
-        router.push('/');
+        toast.success('Password Update successful!'); // 显示成功提示
+        console.log('Password update successful, will navigate to home in 2 seconds.');
+        setTimeout(() => {
+          console.log('Navigating to home now...');
+          window.location.href = '/'; // 使用 window.location.href 强制跳转到首页
+        }, 2000); 
       }
     } catch (error) {
       console.error("Error changing password:", error);
@@ -101,7 +105,11 @@ export const Setting = () => {
       if (response.status === 200) {
         setMessage('File uploaded successfully');
         toast.success('Photo Update successful!');
-        router.push('/');
+        console.log('Photo update successful, will navigate to home in 2 seconds.');
+        setTimeout(() => {
+          console.log('Navigating to home now...');
+          window.location.href = '/'; // 使用 window.location.href 强制跳转到首页
+        }, 2000);
       }
     } catch (error) {
       console.error("Error changing photo:", error);
