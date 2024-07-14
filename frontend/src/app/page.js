@@ -23,7 +23,7 @@ export default function Home() {
               </h1>
             </div>
             <div className="pl-5 mt-10">
-              <Link href="/supervisedquiz">
+              <Link href="/quiznow">
                 <Button>Quiz Now!</Button>
               </Link>
             </div>

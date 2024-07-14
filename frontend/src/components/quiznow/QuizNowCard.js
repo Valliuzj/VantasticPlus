@@ -1,10 +1,10 @@
 "use client";
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import { ScreenWrapper } from '../ScreenWrapper';
-import { Button } from '../ui/button';
+import { ScreenWrapper } from '@/components/ScreenWrapper';
+import { Button } from '@/components/ui/button';
 
-const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion }) => {
+const QuizNowCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion, onLike }) => {
   const [flipped, setFlipped] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
@@ -49,7 +49,7 @@ const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion }) => {
                   className='bg-white h-[450px] rounded-xl shadow-lg relative mx-auto text-center flex flex-col 
                   items-center justify-center p-6' 
                 >
-                  <div className="relative w-auto my-12">
+                  <div className="relative w-auto my-14">
                     <h1 className="text-3xl mb-4 break-words">{quiz.question}</h1>
                   </div>
 
@@ -72,7 +72,8 @@ const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion }) => {
                     ))}
                   </ul>
 
-                  <div className="flex justify-center mt-4">
+                  <div className="flex justify-between items-center mt-4 w-full px-6">
+                    <Button onClick={onLike} className='h-[52px] text-xl shadow-md' variant="outline">Like</Button>
                     <Button onClick={handleSubmit} className='h-[52px] text-xl shadow-md' variant="outline">Submit</Button>
                   </div>
                 </div>
@@ -102,4 +103,4 @@ const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion }) => {
   );
 };
 
-export default QuizCard;
+export default QuizNowCard;
