@@ -15,10 +15,12 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const {user,setUser}=useContext(AuthContext);
   console.log(user);
+  const router = useRouter();
 
   // useEffect(() => {
   //   console.log("Navbar user state changed:", user);
@@ -27,6 +29,8 @@ const Navbar = () => {
   const signUserOut = ()=>{
     sessionStorage.removeItem('token');
     setUser(null);
+      // Redirect to the homepage
+      router.push('/');
   }
 
   return (
