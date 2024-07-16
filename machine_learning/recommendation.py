@@ -66,4 +66,4 @@ def recommend():
     return jsonify({'recommended_question': recommended_question})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8123)

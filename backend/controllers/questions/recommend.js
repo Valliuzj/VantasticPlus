@@ -47,7 +47,7 @@ async function getRecommendation(userEmail) {
   };
 
   try {
-    const response = await axios.post('http://localhost:5000/recommend', data);
+    const response = await axios.post('http://localhost:8123/recommend', data);
     return response.data.recommended_question;
   } catch (error) {
     console.error('Error getting recommendation from model:', error);
