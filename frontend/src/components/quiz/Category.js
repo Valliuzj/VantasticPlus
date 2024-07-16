@@ -1,7 +1,10 @@
 "use client";
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext, useEffect, useRef }from 'react';
 import FunFact from './FunFact';
+
+import { AuthContext } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 import { Button } from "../ui/button";
 
 const categories = [
@@ -15,6 +18,18 @@ const categories = [
 ];
 
 const Category = () => {
+//set up auth to protect pages
+const{user, token}=useContext(AuthContext);
+const router = useRouter();
+const alertShown = useRef(false);
+useEffect(() => {
+  if (!user && !alertShown.current) {
+    alertShown.current = true;
+    alert("Please log in/sign up!");
+    router.push('/');
+  }
+}, [user, router]);
+
   return (
     <div>
       <div className="flex justify-center font-extrabold text-3xl my-10">

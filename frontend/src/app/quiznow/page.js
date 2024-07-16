@@ -4,7 +4,7 @@ import QuizNow from '@/components/quiznow/QuizNow';
 const QuizNowPage = () => {
   return (
     <div>
-      <QuizNow />
+      <QuizNow/>
     </div>
   );
 };
