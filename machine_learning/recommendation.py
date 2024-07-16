@@ -13,6 +13,9 @@ model = joblib.load('random_forest_model.pkl')
 VALID_CATEGORIES = ['Biology', 'History', 'Culture', 'Travel', 'Art', 'Science', 'Geography']
 VALID_DIFFICULTIES = ['easy', 'medium', 'hard']
 
+# Define the feature names as used during training
+FEATURE_NAMES = ['difficulty', 'category', 'like', 'answered', 'liked']
+
 @app.route('/recommend', methods=['POST'])
 def recommend():
     data = request.get_json()
@@ -47,6 +50,9 @@ def recommend():
     combined_features = pd.concat([user_features] * len(filtered_question_features), ignore_index=True)
     combined_features = pd.concat([combined_features, filtered_question_features.reset_index(drop=True)], axis=1).fillna(0)
 
+    # Ensure the feature names match those used during training
+    combined_features.columns = FEATURE_NAMES
+
     # Predict probabilities of each question being a good recommendation
     predictions = model.predict_proba(combined_features)[:, 1]  # Assuming binary classification
 
@@ -60,4 +66,4 @@ def recommend():
     return jsonify({'recommended_question': recommended_question})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8123)
