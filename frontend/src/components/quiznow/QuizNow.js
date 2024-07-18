@@ -82,14 +82,12 @@ const QuizNow = () => {
 
 //answer submit + only record right answer
   const handleAnswerSubmit = async (selectedAnswerIndex) => {
-    setIsButtonDisabled(true);
     const isCorrect = selectedAnswerIndex === quiz.answer;
     setFeedback(isCorrect ? 'Congratulations! You are right!' : 'Wrong, but okay! Try next!');
     if (isCorrect) {
-      await recordAnswered(quiz.id); // 只有在回答正确时才记录
+      await recordAnswered(quiz.id); 
     }
     setAnsweredCount(prevCount => prevCount + 1);
-    setIsButtonDisabled(false);
   };
 
   const recordAnswered = async (questionId) => {
@@ -122,14 +120,14 @@ const QuizNow = () => {
     } catch (error) {
       console.error('Error liking question:', error);
     } finally {
-      setIsButtonDisabled(false);
     }
   };
 
   //get next question from recommendation
   const handleNextQuestion = async () => {
     setLoading(true);
-    console.log("handlenext questions:5")
+    //check point
+    console.log(`handlenext questions"${answeredCount}`)
     if (answeredCount < 7) {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/recommend`, 
@@ -154,7 +152,13 @@ const QuizNow = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return(
+       <div className="bg-violet-50 min-h-screen">
+       <section className="container mx-auto p-6">
+          Loading...
+      </section>
+      </div>
+    )
   }
 
   return (

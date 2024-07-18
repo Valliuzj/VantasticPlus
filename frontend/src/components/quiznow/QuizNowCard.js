@@ -75,7 +75,6 @@ const QuizNowCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion, onLike, i
                   <div className="flex justify-between items-center w-auto px-6">
                     <Button 
                       onClick={handleSubmit} 
-                      disabled={isButtonDisabled}
                       className='mx-6 text-xl text-white bg-blue-500 hover:bg-blue-600'>
                         Submit</Button>
                     <Button 

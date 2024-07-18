@@ -4,7 +4,7 @@ import ReactCardFlip from 'react-card-flip';
 import { ScreenWrapper } from '../ScreenWrapper';
 import { Button } from '../ui/button';
 
-const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion }) => {
+const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion, onLike, isButtonDisabled }) => {
   const [flipped, setFlipped] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
@@ -73,14 +73,14 @@ const QuizCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion }) => {
 
                   <div className="flex justify-between items-center w-auto px-6">
                     <Button 
-                    onClick={handleSubmit} 
-                    className='mx-6 text-xl text-white bg-blue-500 hover:bg-blue-600'>
+                      onClick={handleSubmit} 
+                      className='mx-6 text-xl text-white bg-blue-500 hover:bg-blue-600'>
                       Submit
                     </Button>
                     <Button 
-                     
-                    
-                      className='mx-6 text-xl text-white bg-rose-500 hover:bg-rose-600'>
+                     onClick={onLike} 
+                     disabled={isButtonDisabled}
+                    className='mx-6 text-xl text-white bg-rose-500 hover:bg-rose-600'>
                         Like👍</Button>
                   </div>
                 </div>
