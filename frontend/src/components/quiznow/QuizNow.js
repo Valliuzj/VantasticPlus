@@ -15,10 +15,6 @@ const getRandomCategory = () => {
   const randomIndex = Math.floor(Math.random() * VALID_CATEGORIES.length);
   return VALID_CATEGORIES[randomIndex];
 };
-const getRandomQuestion = (questions) => {
-  const randomIndex = Math.floor(Math.random() * questions.length);
-  return questions[randomIndex];
-};
 
 const QuizNow = () => {
   const [quiz, setQuiz] = useState(null);
@@ -63,12 +59,14 @@ const QuizNow = () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/getQuestionByCategory`, 
         {
-        params: { category: randomCategory  }
+        params: { category: randomCategory  },
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
         });
       console.log('API response:', response.data);
-      if (response.data.length > 0) {
-        const randomQuestion = getRandomQuestion(response.data);
-        setQuiz(randomQuestion);
+      if (response.data) {
+        setQuiz(response.data);
       } else {
         setQuiz(null);
       }
@@ -126,6 +124,7 @@ const QuizNow = () => {
   //get next question from recommendation
   const handleNextQuestion = async () => {
     setLoading(true);
+    setIsButtonDisabled(false);
     //check point
     console.log(`handlenext questions"${answeredCount}`)
     if (answeredCount < 7) {
@@ -153,11 +152,13 @@ const QuizNow = () => {
 
   if (loading) {
     return(
-       <div className="bg-violet-50 min-h-screen">
-       <section className="container mx-auto p-6">
-          Loading...
-      </section>
-      </div>
+      <div className="bg-violet-50 min-h-screen">
+      <section className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center">
+         Loading...
+         </h1>
+     </section>
+     </div>
     )
   }
 
@@ -182,7 +183,11 @@ const QuizNow = () => {
             </Link>
           </div>
         ) : (
-          <div>No quiz data available</div>
+          <section className="container mx-auto p-6">
+          <h1 className="text-3xl font-bold text-center">
+             No Quiz Data
+             </h1>
+         </section>
         )}
       </section>
     </div>

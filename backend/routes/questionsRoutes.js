@@ -11,7 +11,7 @@ const recommendController = require("../controllers/questions/recommend");
 
 router.post("/addQuestion", addQuestionController.addQuestion);
 router.get("/getSingleQuestion", getQuestionController.getSingleQuestion);
-router.get("/getQuestionByCategory", getQuestionByCategoryController.getQuestionByCategory);
+router.get("/getQuestionByCategory", protect, getQuestionByCategoryController.getQuestionByCategory);
 router.post("/answerQuestion", protect, answerQuestionController.answerQuestion);
 router.post("/likeQuestion", protect, likeQuestionController.likeQuestion);
 router.get("/recommend", protect, recommendController.recommend);
