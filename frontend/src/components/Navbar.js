@@ -22,9 +22,12 @@ const Navbar = () => {
   console.log(user);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   console.log("Navbar user state changed:", user);
-  // }, [user]);
+  useEffect(() => {
+    if(!user){
+      //window.location.reload();
+      console.log("Navbar user state changed:", user);
+    }
+   }, [user]);
   
   const signUserOut = ()=>{
     sessionStorage.removeItem('token');
@@ -58,7 +61,13 @@ const Navbar = () => {
           </Command>
 
           <Link href="/chatbot">
-            <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
+            <Button size="lg" 
+            className="text-xl shadow-md text-white  bg-blue-500
+                  rounded-2xl border-2 border-dashed border-black px-6 py-3 
+                  font-semibold uppercase transition-all duration-300 
+                  hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_blue] 
+                  hover:bg-orange-500
+                  active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
               Chatbot
             </Button>
           </Link>

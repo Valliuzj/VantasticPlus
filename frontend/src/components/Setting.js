@@ -30,14 +30,7 @@ export const Setting = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  const router = useRouter(); // 使用 useRouter
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     toast.success('Password Update successful! Please Log in Again');
-  //     router.push('/');
-  //   }
-  // }, [user, router]);
+  const router = useRouter(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,18 +51,17 @@ export const Setting = () => {
         },
         {
           headers: {
-            'Authorization': `Bearer ${token}`, // 将令牌加到请求头部
+            'Authorization': `Bearer ${token}`, 
             'Content-Type': 'application/json'
           }
         }
       );
 
       if (response.status === 201) {
-       // sessionStorage.setItem('token', response.data.token); // 更新令牌
         setOldPassword('');
         setNewPassword('');
         setConfirmPassword('');
-        toast.success('Password Update successful! Please Log in Again');
+        toast.success('Password Update successful!');
         console.log('Password update successful, will navigate to home in 2 seconds.');
         setTimeout(() => {
           sessionStorage.removeItem('token');
@@ -106,7 +98,7 @@ export const Setting = () => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/changePhoto`, formData, {
           headers: {
-            'Authorization': `Bearer ${token}`, // 添加认证信息
+            'Authorization': `Bearer ${token}`, 
             'Content-Type': 'multipart/form-data'
           }
         }
@@ -117,7 +109,7 @@ export const Setting = () => {
         console.log('Photo update successful, will navigate to home in 2 seconds.');
         setTimeout(() => {
           console.log('Navigating to home now...');
-          window.location.href = '/'; // 使用 window.location.href 强制跳转到首页
+          window.location.href = '/'; 
         }, 1000);
       }
     } catch (error) {

@@ -1,6 +1,6 @@
 // components/PostDetails.js
 "use client";
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useRef,useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from 'next/navigation';
@@ -22,16 +22,18 @@ const PostDetails = ({ postId }) => {
   //progress  bar
   const [progress, setProgress] = useState(0); 
   const [loading, setLoading] = useState(true);
-  const { user, token} = useContext(AuthContext);
-  const router = useRouter();
 
-    // Redirect if user is not authenticated
-    useEffect(() => {
-      if (!user) {
-        alert("Please log in/sign up!");
-        router.push('/');
-      }
-    }, [user, router]);
+   //set up auth to protect pages
+   const router = useRouter();
+   const { user, token  } = useContext(AuthContext);
+   const alertShown = useRef(false);
+   useEffect(() => {
+   if (!user && !alertShown.current) {
+       alertShown.current = true;
+       alert("Please log in/sign up!");
+       router.push('/');
+       }
+   }, [user, router]);
 
 //show the data
   useEffect(() => {

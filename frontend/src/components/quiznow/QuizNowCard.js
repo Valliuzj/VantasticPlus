@@ -30,10 +30,6 @@ const QuizNowCard = ({ quiz, onAnswerSubmit, feedback, onNextQuestion, onLike, i
     onNextQuestion();
   };
 
-  if (!quiz || !quiz.choices || !quiz.category || !quiz.difficulty || !quiz.question || !quiz.answer) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="bg-violet-50">
       <section>

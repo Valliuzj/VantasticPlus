@@ -38,6 +38,7 @@ const QuizNow = () => {
       alertShown.current = true;
       alert("Please log in/sign up!");
       router.push('/');
+      
     }
   }, [user, router]);
 
@@ -159,9 +160,8 @@ const QuizNow = () => {
   return (
     <div className="bg-violet-50 min-h-screen">
       <section className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">Quiz Now</h1>
         {error && <div className="text-red-500 mb-4">{error}</div>}
-        {quiz && answeredCount < 5 ? (
+        {quiz && answeredCount < 7 ? (
           <QuizNowCard
             quiz={quiz}
             onAnswerSubmit={handleAnswerSubmit}
@@ -170,11 +170,11 @@ const QuizNow = () => {
             onLike={handleLike}
             isButtonDisabled={isButtonDisabled}
           />
-        ) : answeredCount >= 6 ? (
+        ) : answeredCount >= 7 ? (
           <div>
-            <h2 className="text-3xl font-bold mb-4">Well done!</h2>
+            <h2 className="flex justify-center font-extrabold text-3xl my-10 text-rose-500">Well done!</h2>
             <Link href="/">
-              <Button className="h-[52px] text-xl shadow-md" variant="outline">Return Home</Button>
+              <Button className="flex justify-center mx-auto h-[52px] w-[200px] text-xl text-white shadow-md bg-blue-500 hover:bg-blue-600">Return Home</Button>
             </Link>
           </div>
         ) : (
