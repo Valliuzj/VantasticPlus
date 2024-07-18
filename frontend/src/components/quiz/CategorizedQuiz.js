@@ -32,13 +32,17 @@ const CategorizedQuiz = () => {
     setError(null);
     try {
       console.log(`Fetching quiz with category: ${category}`);
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/getQuestionByCategory`, {
-        params: { category: category }
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/getQuestionByCategory`, 
+        {
+        params: { category: category },
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+        });
       console.log('API response:', response.data);
-      if (response.data.length > 0) {
-        const randomQuiz = response.data[Math.floor(Math.random() * response.data.length)];
-        setQuiz(randomQuiz);
+      if (response.data) {
+        setQuiz(response.data);
       } else {
         setQuiz(null);
       }
@@ -94,8 +98,9 @@ const handleLike = async () => {
   }
 };
 
-
+//fetch next question
   const handleNextQuestion = () => {
+    setIsButtonDisabled(false);
     if (answeredCount < 7) {
     fetchQuizByCategory(categoryID);
     }
