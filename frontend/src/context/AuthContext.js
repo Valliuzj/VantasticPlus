@@ -9,9 +9,9 @@ export const AuthProvider = ({children})=>{
 
     useEffect(()=>{
         const fetchUser = async()=>{
-            const storedToken = sessionStorage.getItem('token'); // 使用const存储从sessionStorage获取的token
+            const storedToken = sessionStorage.getItem('token'); 
             if (storedToken) {
-                setToken(storedToken); // 设置token
+                setToken(storedToken); 
                 try{
                     const response = await axios.get(
                         `${process.env.NEXT_PUBLIC_API_BASE_URL}/me`, 
@@ -31,6 +31,7 @@ export const AuthProvider = ({children})=>{
          };
         fetchUser();
     },[]);
+
 
     return(
         <AuthContext.Provider value={{user,setUser,token}}>

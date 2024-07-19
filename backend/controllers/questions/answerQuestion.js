@@ -21,7 +21,6 @@ exports.answerQuestion = async (req, res) => {
             }, { merge: true });
 
             res.status(200).json({ message: `Recorded answered for user ${userId} on question ${questionId}` });
-
         } catch (error) {
             return res.status(500).json({ "Error answering question:": error });
         }    

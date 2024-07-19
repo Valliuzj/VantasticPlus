@@ -3,6 +3,8 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '@/context/AuthContext';
+import Searchbar from './Searchbar';
+import FunFact from './quiz/FunFact';
 // ui
 import { Button } from './ui/button';
 import { CommandInput, Command } from './ui/command';
@@ -15,18 +17,25 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const {user,setUser}=useContext(AuthContext);
   console.log(user);
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   console.log("Navbar user state changed:", user);
-  // }, [user]);
+  useEffect(() => {
+    if(!user){
+      //window.location.reload();
+      console.log("Navbar user state changed:", user);
+    }
+   }, [user]);
   
   const signUserOut = ()=>{
     sessionStorage.removeItem('token');
     setUser(null);
+      // Redirect to the homepage
+      router.push('/');
   }
 
   return (
@@ -48,13 +57,16 @@ const Navbar = () => {
         </div>
         {/* search bar */}
         <div className="flex-grow flex items-center justify-between mx-4">
-          <Command className="rounded-lg border shadow-md mx-2">
-            <CommandInput
-              placeholder="Type a command or search..." />
-          </Command>
+          <FunFact/>
 
           <Link href="/chatbot">
-            <Button size="lg" className="text-gray-900 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded mx-2">
+            <Button size="lg" 
+            className="text-xl shadow-md text-white  bg-blue-500
+                  rounded-2xl border-2 border-dashed border-black px-6 py-3 
+                  font-semibold uppercase transition-all duration-300 
+                  hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_blue] 
+                  hover:bg-orange-500
+                  active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
               Chatbot
             </Button>
           </Link>

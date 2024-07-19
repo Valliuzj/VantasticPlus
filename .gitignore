@@ -4,3 +4,8 @@
 # Operating system files
 .DS_Store
 
+venv
+
+machine_learning/random_forest_model.pkl
+machine_learning/Pipfile
+*.pkl
