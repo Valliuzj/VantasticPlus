@@ -38,7 +38,6 @@ exports.userLogin = async function (req, res) {
             process.env.JWT_SECRET
         );
 
-        // Return success response
         return res.status(201).json({
           message: "User logged in successfully",
           token: token

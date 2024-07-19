@@ -18,10 +18,8 @@ exports.registerUser = async function(req, res) {
                 return res.status(400).json({ error: "User already exists" });
             }
 
-            // Hash and salt password
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            //create user in firebase
             const userRef = await db.collection('users').doc(email);
             await userRef.set({
                 userEmail: email,
@@ -30,7 +28,7 @@ exports.registerUser = async function(req, res) {
                 photoURL: photoURL,
             });
 
-            // Generate token for first time login, token expires in 2 hours
+            //token expires in 2 hours
             const currentTimestamp = Math.floor(Date.now() / 1000); 
             const expiresIn = 7200; 
 
@@ -39,13 +37,12 @@ exports.registerUser = async function(req, res) {
                     email: email,
                     name: displayName,
                     photoURL: photoURL,
-                    iat: currentTimestamp, // Issued at time
-                    exp: currentTimestamp + expiresIn, // Expiration time
+                    iat: currentTimestamp, 
+                    exp: currentTimestamp + expiresIn, 
                 },
                 process.env.JWT_SECRET
             );
 
-            // Return success response
             return res.status(201).json({
                 message: "User registered successfully",
                 token: token

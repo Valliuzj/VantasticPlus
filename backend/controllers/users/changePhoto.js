@@ -26,7 +26,6 @@ exports.changePhoto = async function(req, res, next) {
         try {
             upload.single("image")(req, res, async function(err) {
                 if (err instanceof multer.MulterError) {
-                    //handle file size limit error
                     if (err.code === 'LIMIT_FILE_SIZE') {
                         return res.status(400).json({
                             error: 'File size exceeds the allowed limit: 1MB.',
