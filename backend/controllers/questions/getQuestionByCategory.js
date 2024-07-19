@@ -22,34 +22,37 @@ exports.getQuestionByCategory = async (req, res) => {
             questions.push({ id: doc.id, ...doc.data() });
         });
 
-            const userEmail = req.user.email;
-            const userInteractionsSnapshot = await db.collection('userData')
+        const userEmail = req.user.email;
+        console.log(`Fetching interactions for user: ${userEmail}`);
+
+        const userInteractionsSnapshot = await db.collection('users')
             .doc(userEmail)
             .collection('interactions')
             .where('answered', '==', true)
             .get();
 
-            const answeredQuestionIds = [];
-            userInteractionsSnapshot.forEach(doc => {
-                answeredQuestionIds.push(doc.id);
-            });
+        const answeredQuestionIds = new Set();
+        userInteractionsSnapshot.forEach(doc => {
+            console.log('Answered Question Document:', doc.id, doc.data());
+            answeredQuestionIds.add(doc.id);
+        });
 
-            const unansweredQuestions = [];
-            questionsSnapshot.forEach(doc => {
-                if (!answeredQuestionIds.includes(doc.id)) {
-                    unansweredQuestions.push({ id: doc.id, ...doc.data() });
-                }
-            });
-            if (unansweredQuestions.length === 0) {
-                return res.status(404).json({ error: "You have answered all the questions in this category" });
-            }
+        //console.log('Answered Question IDs:', Array.from(answeredQuestionIds));
 
-            const randomIndex = Math.floor(Math.random() * unansweredQuestions.length);
-            const randomQuestion = unansweredQuestions[randomIndex];
+        const unansweredQuestions = questions.filter(question => !answeredQuestionIds.has(question.id));
 
-            res.json(randomQuestion);
-        } catch (error) {
-            console.error("Error getting question by category:", error);
-            res.status(500).json({ error: "Internal server error" });
+        //console.log('Unanswered Questions:', unansweredQuestions.map(question => question.id));
+
+        if (unansweredQuestions.length === 0) {
+            return res.status(404).json({ error: "You have answered all the questions in this category" });
         }
+
+        const randomIndex = Math.floor(Math.random() * unansweredQuestions.length);
+        const randomQuestion = unansweredQuestions[randomIndex];
+
+        res.json(randomQuestion);
+    } catch (error) {
+        console.error("Error getting question by category:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
+}
