@@ -52,13 +52,13 @@ const Navbar = () => {
           </Link>
 
           <Link href="/discuss" className="text-gray-900 border-b-2 border-transparent text-xl font-medium hover:border-violet-500">
-            Learn & share
+            Learn& share
           </Link>
         </div>
 
         {/* fun fact + chatbot */}
         <div className="flex-grow flex items-center justify-between mx-4">   
-          <div className='flex-0 width-[100px]'>
+          <div className='max-w-[800px] min-w-[650px] flex-1'>
             <FunFact/>
           </div>
 

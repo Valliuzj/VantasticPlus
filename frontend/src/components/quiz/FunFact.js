@@ -41,7 +41,7 @@ const FunFact = () => {
   }, []);
 
   return (
-    <div className="w-[650px] overflow-hidden rounded-lg border shadow-md ml-3 px-2 py-2">
+    <div className="max-w-[800px] min-w-[650px] overflow-hidden rounded-lg border shadow-md ml-3 mr-3 px-2 py-2">
         <div className="fun-fact font-mono font-bold text-rose-500 ">
           Today's Fun Fact: "{fact}"
        </div>
