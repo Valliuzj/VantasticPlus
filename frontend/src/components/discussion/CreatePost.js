@@ -16,7 +16,6 @@ import {
   import { Input } from "@/components/ui/input"
   import { Textarea } from "@/components/ui/textarea"
   import { Button } from "../ui/button";
-  import { Progress } from "@/components/ui/progress"
 
 export const CreatePost =()=>{
     const [formData, setFormData] = useState({ title: '', content: '' })
@@ -24,7 +23,6 @@ export const CreatePost =()=>{
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0); 
     
     //set up auth to protect pages
     const router = useRouter();
@@ -56,7 +54,6 @@ export const CreatePost =()=>{
     const handleSubmit = async(e)=>{
         e.preventDefault();
         setLoading(true);
-        setProgress(25);
         try{ console.log(user);
             if (!token) {
                 throw new Error('No token found');
@@ -74,7 +71,6 @@ export const CreatePost =()=>{
                     },
                 }
             );
-            setProgress(50);
             if (response.status === 201) {
                 toast(response.data.message, {
                     position: "top-center"
@@ -88,19 +84,9 @@ export const CreatePost =()=>{
             setError('Failed to create post. Please try again.');
         }finally{
             setLoading(false);
-            setProgress(100);
+           
         }
     };
-
-    if (loading) {
-        return (
-          <div className="flex items-center justify-center h-screen">
-            <div className="w-1/2">
-              <Progress value={progress} color="primary" />
-            </div>
-          </div>
-        );
-      }
     
     return(
         <div className="flex min-h-screen w-full flex-col bg-violet-50">
