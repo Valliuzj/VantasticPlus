@@ -3,6 +3,8 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '@/context/AuthContext';
+import Searchbar from './Searchbar';
+import FunFact from './quiz/FunFact';
 // ui
 import { Button } from './ui/button';
 import { CommandInput, Command } from './ui/command';
@@ -55,10 +57,7 @@ const Navbar = () => {
         </div>
         {/* search bar */}
         <div className="flex-grow flex items-center justify-between mx-4">
-          <Command className="rounded-lg border shadow-md mx-2">
-            <CommandInput
-              placeholder="Type a command or search..." />
-          </Command>
+          <FunFact/>
 
           <Link href="/chatbot">
             <Button size="lg" 

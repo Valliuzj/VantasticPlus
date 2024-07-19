@@ -5,7 +5,7 @@ export const ScreenWrapper=(
     children}
 )=> {
     return <div className={cn(
-        "h-full w-full max-w-screen-xl mx-auto px-2.5 md:px-20",
+        "h-full w-full max-w-screen-xl mx-auto md:px-20",
         className
         )}>
             {children}
