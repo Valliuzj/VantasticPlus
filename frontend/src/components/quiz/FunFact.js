@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../index.css';
+import { CommandInput,Command } from '../ui/command';
 
 const FunFact = () => {
   const [fact, setFact] = useState('');
@@ -39,17 +41,11 @@ const FunFact = () => {
   }, []);
 
   return (
-        <div className='lg:grid lg:grid-cols-3 bg-white h-[150px] rounded-xl shadow-lg relative bg-transparent mb-5'>
-        <div className="col-span-1 flex flex-col items-center justify-center lg:items-start">
-                <div className="my-5 ml-10 font-extrabold text-2xl text-rose-500">
-                    Today's Fun Fact:
-                </div>
-        </div>
-        <div className="col-span-full lg:col-span-2 flex">
-            <p className="my-auto text-wrap">{fact}</p>
-        </div>
-        
-    </div>
+    <div className="w-[650px] overflow-hidden rounded-lg border shadow-md ml-3 px-2 py-2">
+        <div className="fun-fact font-mono font-bold text-rose-500 ">
+          Today's Fun Fact: "{fact}"
+       </div>
+       </div>
   );
 };
 

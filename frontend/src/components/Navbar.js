@@ -55,10 +55,14 @@ const Navbar = () => {
             Learn & share
           </Link>
         </div>
-        {/* search bar */}
-        <div className="flex-grow flex items-center justify-between mx-4">
-          <FunFact/>
 
+        {/* fun fact + chatbot */}
+        <div className="flex-grow flex items-center justify-between mx-4">   
+          <div className='flex-0 width-[100px]'>
+            <FunFact/>
+          </div>
+
+          <div>
           <Link href="/chatbot">
             <Button size="lg" 
             className="text-xl shadow-md text-white  bg-blue-500
@@ -70,6 +74,7 @@ const Navbar = () => {
               Chatbot
             </Button>
           </Link>
+          </div>
         </div>
 
         {/* user bar */}
