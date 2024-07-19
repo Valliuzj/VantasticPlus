@@ -3,7 +3,6 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '@/context/AuthContext';
-import Searchbar from './Searchbar';
 import FunFact from './quiz/FunFact';
 // ui
 import { Button } from './ui/button';
