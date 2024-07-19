@@ -11,7 +11,7 @@ exports.protect = async function(req, res, next) {
 
         // Verify the JWT
         const decodedToken = jwt.verify(bearerToken, process.env.JWT_SECRET);
-        req.user = decodedToken; // Attach the user to the request object
+        req.user = decodedToken; 
 
         const userSnapshot = await db.collection('users').doc(decodedToken.email).get();
 
@@ -21,7 +21,7 @@ exports.protect = async function(req, res, next) {
 
         next(); 
     } catch (error) {
-        console.error("Error verifying token:", error);
+        //console.error("Error verifying token:", error);
         return res.status(401).json({ error: "Invalid authentication token" });
     }
 };

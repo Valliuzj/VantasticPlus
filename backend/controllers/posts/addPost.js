@@ -5,7 +5,7 @@ exports.addPost = async function(req, res) {
         try {
             const {title, content} = req.body;
             if (!title || !content) {
-                return res.status(400).json({ error: "title, content and author are required" });
+                return res.status(400).json({ error: "title, content are required" });
             }
 
             const author = {
@@ -28,8 +28,8 @@ exports.addPost = async function(req, res) {
                 postID: postRef.id
             });
         } catch (error) {
-            //console.error("Error registering new user:", error);
-            return res.status(500).json({ "Error registering new user:": error });
+            //console.error("Error adding post:", error);
+            return res.status(500).json({ "Error adding post:": error });
         }
     } else {
         return res.status(405).json({ error: "Method not allowed" });
