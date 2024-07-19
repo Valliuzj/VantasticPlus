@@ -1,6 +1,23 @@
 # VantasticPlus
 
 **Vantastic+ - An Innovative Learning Platform for Vancouverites and Fans**
+## Frontend Setup
+1. **Enter the frontend folder**:
+   
+   cd frontend
+   
+3. **Create .env.local:**
+   
+   `NEXT_PUBLIC_API_BASE_URL= https://your-api-base-url.com`
+   For example: `http://localhost:8000`. It should be the same with your backend portal.
+
+5. **Install dependencies**:
+   
+   `npm install`
+
+7. **Start the server**:
+
+   Use `npm run dev` to start the server.
 
 ## Backend Setup
 
