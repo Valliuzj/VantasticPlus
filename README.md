@@ -40,7 +40,7 @@ To get the backend of Vantastic+ up and running, follow these steps:
 2. **Install all the packages**
    ```sh
    pip install requirements.txt
-3. **Start the flask API **
+3. **Start the flask API**
    ```sh
    python recommendation.py
 4. **If there is versions error**
